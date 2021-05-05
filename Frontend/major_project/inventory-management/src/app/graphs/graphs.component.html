@@ -1,0 +1,140 @@
+<div style="padding-left: 20px; padding-top: 20px; background-image: linear-gradient(45DEG, #15552d, #51a86b);">
+  <h1 style="color: white">Revenue: Rs. {{revenue}}</h1>
+      <h1 style="color: white">Total Orders: {{orders}}</h1>
+      <h1 style="color: white">Total Units: {{units}}</h1>
+      <div
+  fxLayout="row"
+  fxLayoutAlign="center "
+  style="height: 93.5vh;  background-image: linear-gradient(45DEG, #15552d, #51a86b);"
+  >
+  
+  <div
+    fxLayout="column"
+    
+    fxLayoutGap="10px"
+  >
+<mat-card style="background-image: linear-gradient(45DEG, #27743e, #16532d )">
+<mat-tab-group fxLayout="column" fxLayoutAlign="center center"  style="padding-top: 20px; background-image: linear-gradient(45DEG, #16532d, #27743e);">
+  
+  <!-- <mat-tab label="Stats">
+    <div fxLayout="column" fxLayoutAlign="center center"  style="padding-top: 20px;">
+      
+    </div>
+  </mat-tab> -->
+  <mat-tab label="Inventory">
+    <div *ngIf="run3" style="width: 1000px;
+  
+    ">
+        <canvas baseChart
+        [data]="pieChartData3"
+        [labels]="pieChartLabels3"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend">
+      </canvas>
+      </div>
+  </mat-tab>
+  <mat-tab label="Orders">
+    <div *ngIf="run" style="width: 1000px;">
+       <canvas baseChart
+       [data]="pieChartData"
+       [labels]="pieChartLabels"
+       [chartType]="pieChartType"
+       [options]="pieChartOptions"
+       [colors]="pieChartColors"
+       [legend]="pieChartLegend">
+     </canvas>
+    </div>
+  </mat-tab>
+  <mat-tab label="Purchase">
+    <div *ngIf="run2" style="width: 1000px;
+  
+    ">
+       <canvas baseChart
+       [data]="pieChartData2"
+       [labels]="pieChartLabels2"
+       [chartType]="pieChartType"
+       [options]="pieChartOptions"
+       [colors]="pieChartColors"
+       [legend]="pieChartLegend">
+     </canvas>
+     </div>
+  </mat-tab>
+  
+</mat-tab-group>
+</mat-card>
+</div>
+
+</div>
+</div>
+
+
+<!-- <div fxLayout="row" fxLayoutAlign="space-evenly start" style="padding-top: 20px;">
+  <div fxLayout="column" >
+  <h1 style="padding-left: 370px;">Orders</h1>
+  <div *ngIf="run" style="width: 800px;
+  
+ ">
+    <canvas baseChart
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [colors]="pieChartColors"
+    [legend]="pieChartLegend">
+  </canvas>
+  </div>
+  </div>
+  <div fxLayout="column" >
+    <h1 style="padding-left: 350px;">Purchases</h1>
+  <div *ngIf="run2" style="width: 800px;
+  
+  ">
+    <canvas baseChart
+    [data]="pieChartData2"
+    [labels]="pieChartLabels2"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [colors]="pieChartColors"
+    [legend]="pieChartLegend">
+  </canvas>
+  </div>
+  
+</div>
+      
+</div>
+<div fxLayout="row" fxLayoutAlign="space-evenly start" style="padding-top: 20px;">
+  <div fxLayout="column" >
+    <h1 style="padding-left: 350px;">Inventory</h1>
+<div *ngIf="run3" style="width: 800px;
+  
+">
+    <canvas baseChart
+    [data]="pieChartData3"
+    [labels]="pieChartLabels3"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [colors]="pieChartColors"
+    [legend]="pieChartLegend">
+  </canvas>
+  </div>
+  </div>
+  <div fxLayout="column" >
+    <h1 style="padding-left: 370px;">Stats</h1>
+    <h1 style="padding-left: 300px;">Revenue: Rs. {{revenue}}</h1>
+  <div *ngIf="run4" style="width: 800px;
+  height: 800px;
+">
+    <canvas baseChart
+    [data]="pieChartData4"
+    [labels]="pieChartLabels4"
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [colors]="pieChartColors"
+    [legend]="pieChartLegend">
+  </canvas>
+  </div>
+</div>
+</div> -->
+

@@ -1,0 +1,17 @@
+.title {
+  color: white;
+  font-size: 30px;
+  margin-left: 5px;
+}
+.navbar-nav {
+  margin-left: 180px;
+}
+
+/* .button{
+margin-left: 40px;
+
+} */
+
+.shrink-toolbar {
+  height: 32px;
+}

@@ -1,0 +1,29 @@
+<div mat-dialog-content style="height: 22vh;">
+  <form [formGroup]="dialogformgroup">
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>name</label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>address</label>
+        <input matInput formControlName="address" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>mobile</label>
+        <input matInput formControlName="mobile" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>emailId</label>
+        <input matInput formControlName="emailId" />
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly start">
+      <button mat-button (click)="close()">Cancel</button>
+      <button mat-button cdkFocusInitial (click)="onNoClick()">Ok</button>
+    </div>
+  </form>
+</div>

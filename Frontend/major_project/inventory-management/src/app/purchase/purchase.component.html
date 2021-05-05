@@ -1,0 +1,475 @@
+
+
+<div
+  fxLayout="row"
+  fxLayoutAlign="center "
+  style="height: 93.5vh; padding-top: 120px; background-image: linear-gradient(45DEG, #15552d, #51a86b);"
+  >
+  <div
+    fxLayout="column"
+    
+    fxLayoutGap="10px"
+  >
+  <mat-card style="background-image: linear-gradient(45DEG, #27743e, #16532d )">
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+  <button mat-raised-button color="black" (click)="openDialog()" style="background-image: linear-gradient(to right, #fc4a1a, #f7b733)">Add Purchase</button>
+  <button mat-icon-button color="black" (click)="fetch()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+    <mat-tab-group style="padding-top: 20px;">
+      <mat-tab label="Draft">
+        <mat-table style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e);" [dataSource]="dataSourceDraft" class="mat-elevation-z8">
+          <ng-container matColumnDef="purchase_id">
+            <mat-header-cell *matHeaderCellDef>Purchase Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="product_id">
+            <mat-header-cell *matHeaderCellDef>Product Id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.productId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseQuantity }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="supplier_id">
+            <mat-header-cell *matHeaderCellDef>Supplier Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.supplierId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateofpurchase">
+            <mat-header-cell *matHeaderCellDef>Date of Purchase</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.dateOfPurchase | date: "mediumDate" }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.status }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paid">
+            <mat-header-cell *matHeaderCellDef>Paid</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paid }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paymentMethod">
+            <mat-header-cell *matHeaderCellDef>Payment Method</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paymentMethod }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="update">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-button
+              (click)="
+              editDialog(
+                row.purchaseId,
+                row.productId,
+                row.purchaseQuantity,
+                row.supplierId,
+                row.dateOfPurchase,
+                row.status,
+                row.paid,
+                row.paymentMethod
+              )
+            "
+              ><mat-icon>mode</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <div
+              *ngIf="isLoading"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <mat-spinner color="primary" [diameter]="30" style="margin: 10px">
+              </mat-spinner>
+            </div>
+            <mat-card
+              *ngIf="!isLoading && !dataSourceDraft?.filteredData?.length"
+              style="text-align: center; font-weight: bold; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+              ><h3>No Purchase Order Available</h3>
+            </mat-card>
+        <mat-paginator style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+          [pageSizeOptions]="[5, 10, 20, 25]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </mat-tab>
+
+      <mat-tab label="Raised">
+        <mat-table style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e);" [dataSource]="dataSourceRaised" class="mat-elevation-z8">
+          <ng-container matColumnDef="purchase_id">
+            <mat-header-cell *matHeaderCellDef>Purchase Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="product_id">
+            <mat-header-cell *matHeaderCellDef>Product Id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.productId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseQuantity }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="supplier_id">
+            <mat-header-cell *matHeaderCellDef>Supplier Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.supplierId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateofpurchase">
+            <mat-header-cell *matHeaderCellDef>Date of Purchase</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.dateOfPurchase | date: "mediumDate" }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.status }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paid">
+            <mat-header-cell *matHeaderCellDef>Paid</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paid }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paymentMethod">
+            <mat-header-cell *matHeaderCellDef>Payment Method</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paymentMethod }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="update">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-button
+              (click)="
+              editDialog(
+                row.purchaseId,
+                row.productId,
+                row.purchaseQuantity,
+                row.supplierId,
+                row.dateOfPurchase,
+                row.status,
+                row.paid,
+                row.paymentMethod
+              )
+            "
+              ><mat-icon>mode</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <div
+              *ngIf="isLoading"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <mat-spinner color="primary" [diameter]="30" style="margin: 10px">
+              </mat-spinner>
+            </div>
+            <mat-card
+              *ngIf="!isLoading && !dataSourceRaised?.filteredData?.length"
+              style="text-align: center; font-weight: bold; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+              ><h3>No Purchase Order Available</h3>
+            </mat-card>
+        <mat-paginator style="width: 80vw;background-image: linear-gradient(45DEG, #16532d, #27743e)"
+          [pageSizeOptions]="[5, 10, 20, 25]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </mat-tab>
+
+      <mat-tab label="Received">
+        <mat-table style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e);" [dataSource]="dataSourceReceived" class="mat-elevation-z8">
+          <ng-container matColumnDef="purchase_id">
+            <mat-header-cell *matHeaderCellDef>Purchase Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="product_id">
+            <mat-header-cell *matHeaderCellDef>Product Id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.productId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseQuantity }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="supplier_id">
+            <mat-header-cell *matHeaderCellDef>Supplier Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.supplierId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateofpurchase">
+            <mat-header-cell *matHeaderCellDef>Date of Purchase</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.dateOfPurchase | date: "mediumDate" }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.status }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paid">
+            <mat-header-cell *matHeaderCellDef>Paid</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paid }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paymentMethod">
+            <mat-header-cell *matHeaderCellDef>Payment Method</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paymentMethod }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="update">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-button
+              (click)="
+              editDialog(
+                row.purchaseId,
+                row.productId,
+                row.purchaseQuantity,
+                row.supplierId,
+                row.dateOfPurchase,
+                row.status,
+                row.paid,
+                row.paymentMethod
+              )
+            "
+              ><mat-icon>mode</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <div
+              *ngIf="isLoading"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <mat-spinner color="primary" [diameter]="30" style="margin: 10px">
+              </mat-spinner>
+            </div>
+            <mat-card
+              *ngIf="!isLoading && !dataSourceReceived?.filteredData?.length"
+              style="text-align: center; font-weight: bold; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+              ><h3>No Purchase Order Available</h3>
+            </mat-card>
+        <mat-paginator style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+          [pageSizeOptions]="[5, 10, 20, 25]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </mat-tab>
+
+      <mat-tab label="Closed">
+        <mat-table style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e);" [dataSource]="dataSourceClosed" class="mat-elevation-z8">
+          <ng-container matColumnDef="purchase_id">
+            <mat-header-cell *matHeaderCellDef>Purchase Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="product_id">
+            <mat-header-cell *matHeaderCellDef>Product Id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.productId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseQuantity }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="supplier_id">
+            <mat-header-cell *matHeaderCellDef>Supplier Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.supplierId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateofpurchase">
+            <mat-header-cell *matHeaderCellDef>Date of Purchase</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.dateOfPurchase | date: "mediumDate" }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.status }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paid">
+            <mat-header-cell *matHeaderCellDef>Paid</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paid }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paymentMethod">
+            <mat-header-cell *matHeaderCellDef>Payment Method</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.paymentMethod }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="update">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-button
+              (click)="
+              editDialog(
+                row.purchaseId,
+                row.productId,
+                row.purchaseQuantity,
+                row.supplierId,
+                row.dateOfPurchase,
+                row.status,
+                row.paid,
+                row.paymentMethod
+              )
+            "
+              ><mat-icon>mode</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <div
+              *ngIf="isLoading"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <mat-spinner color="primary" [diameter]="30" style="margin: 10px">
+              </mat-spinner>
+            </div>
+            <mat-card
+              *ngIf="!isLoading && !dataSourceClosed?.filteredData?.length"
+              style="text-align: center; font-weight: bold; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+              ><h3>No Purchase Order Available</h3>
+            </mat-card>
+        <mat-paginator style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e)"
+          [pageSizeOptions]="[5, 10, 20, 25]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </mat-tab>
+      <!-- <mat-tab label="Cancelled">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="purchase_id">
+            <mat-header-cell *matHeaderCellDef>purchase_id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="product_id">
+            <mat-header-cell *matHeaderCellDef>product_id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.productId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef>quantity </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.purchaseQuantity }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="supplier_id">
+            <mat-header-cell *matHeaderCellDef>supplier_id</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.supplierId }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateofpurchase">
+            <mat-header-cell *matHeaderCellDef>dateofpurchase</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.dateOfPurchase | date: "mediumDate" }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.status }}
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20, 25]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </mat-tab> -->
+    </mat-tab-group>
+  </mat-card>
+  </div>
+</div>

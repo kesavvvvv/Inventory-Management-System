@@ -1,0 +1,119 @@
+<!-- <div class="cdk-virtual-scroll-data-source-example">
+  <cdk-virtual-scroll-viewport
+    orientation="horizontal"
+    itemSize="40"
+    class="example-viewport"
+  > -->
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center"
+      style="height: 93.5vh; padding-top: 120px; background-image: linear-gradient(45DEG, #15552d, #51a86b);"
+    >
+      <div
+        fxLayout="column"
+        
+        fxLayoutGap="10px"
+      >
+      <mat-card style="background-image: linear-gradient(45DEG, #27743e, #16532d )">
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+          <button mat-raised-button color="black" (click)="openDialog()" style="background-image: linear-gradient(to right, #fc4a1a, #f7b733)">
+            Add Supplier
+            </button>
+            <button mat-icon-button color="black" (click)="fetch()">
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+          <mat-form-field style="padding-left: 20px;">
+            <mat-label style="padding-left: 10px;">Filter</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Ex. ium"
+              #input
+            />
+          </mat-form-field>
+          <div class="mat-elevation-z8">
+            <mat-table
+              [dataSource]="dataSource"
+              class="mat-elevation-z8"
+              style="width: 80vw; background-image: linear-gradient(45DEG, #16532d, #27743e);"
+              matSort
+              matSortActive="supplier_id"
+            >
+              <ng-container matColumnDef="supplier_id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  >Supplier Id</mat-header-cell
+                >
+                <mat-cell *matCellDef="let element">
+                  {{ element.supplierId }}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Supplier Name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element.name }}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="address">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Address
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element.address }}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="mobile_no">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Mobile Number</mat-header-cell
+                >
+                <mat-cell *matCellDef="let element">
+                  {{ element.mobile }}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  >Email</mat-header-cell
+                >
+                <mat-cell *matCellDef="let element">
+                  {{ element.emailId }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row
+                *matHeaderRowDef="displayedColumns"
+              ></mat-header-row>
+              <mat-row
+                *matRowDef="let row; columns: displayedColumns"
+              ></mat-row>
+            </mat-table>
+            <div
+              *ngIf="isLoading"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <mat-spinner color="primary" [diameter]="30" style="margin: 10px">
+              </mat-spinner>
+            </div>
+            <mat-card
+              *ngIf="!isLoading && !dataSource?.filteredData?.length"
+              style="text-align: center; font-weight: bold; background-image: linear-gradient(45DEG, #16532d, #27743e);"
+              ><h3>No Supplier Available</h3>
+            </mat-card>
+            <mat-paginator style="background-image: linear-gradient(45DEG, #16532d, #27743e);"
+              [pageSizeOptions]="[10, 20, 30]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  <!-- </cdk-virtual-scroll-viewport>
+</div> -->

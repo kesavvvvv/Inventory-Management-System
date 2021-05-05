@@ -1,0 +1,73 @@
+<div mat-dialog-content style="height: 100%;">
+    <form [formGroup]="dialogformgroup">
+      <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+
+        <label>Product Id</label>
+        <input matInput formControlName="productId" [matAutocomplete]="auto" />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of products" [value]="option.itemId">
+            {{ option.itemName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Supplier Id</label>
+        <input
+          matInput
+          formControlName="supplierId"
+          [matAutocomplete]="auto2"
+        />
+        <mat-autocomplete #auto2="matAutocomplete">
+          <mat-option
+            *ngFor="let option2 of suppliers"
+            [value]="option2.supplierId"
+          >
+            {{ option2.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>Status</label>
+        <mat-select disableRipple formControlName="status">
+          <mat-option value="draft">Draft</mat-option>
+          <!-- <mat-option value="raised">Raised</mat-option>
+          <mat-option value="received">Received</mat-option>
+          <mat-option value="closed">Closed</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Purchase Quantity</label>
+        <input matInput formControlName="purchaseQuantity" />
+      </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-evenly start">
+        <mat-form-field>
+       
+          <label>Paid</label>
+          <mat-select disableRipple formControlName="paid">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        
+      </mat-form-field>
+      <mat-form-field>
+       
+        <label>Payment Method</label>
+          <mat-select disableRipple formControlName="paymentMethod">
+            <mat-option value="Cash">Cash</mat-option>
+            <mat-option value="Card">Card</mat-option>
+            <mat-option value="Net Banking">Net Banking</mat-option>
+            <mat-option value="UPI">UPI</mat-option>
+          </mat-select>
+        
+      </mat-form-field>
+    </div>
+      <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly start">
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-button cdkFocusInitial (click)="onNoClick()">Ok</button>
+      </div>
+    </form>
+  </div>

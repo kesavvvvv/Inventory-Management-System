@@ -1,0 +1,28 @@
+<div mat-dialog-content style="height: 22vh;">
+  <form [formGroup]="dialogformgroup">
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>Product Name</label>
+        <input matInput formControlName="itemName" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>Available</label>
+        <input matInput formControlName="available" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>Purchase Price</label>
+        <input matInput formControlName="purchase_price" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>Selling Price</label>
+        <input matInput formControlName="selling_price" />
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly start">
+      <button mat-button (click)="close()">Cancel</button>
+      <button mat-button cdkFocusInitial (click)="onNoClick()">Ok</button>
+    </div>
+  </form>
+</div>

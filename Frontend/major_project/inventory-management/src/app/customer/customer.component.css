@@ -1,0 +1,44 @@
+
+table td,
+table th {
+  padding: 2px 10px;
+}
+*/
+
+/* #divChart{
+  display:block;
+  width:400px;
+  height:400px;
+} */
+
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-cell {
+  text-align: center;
+  /* justify-content: center; */
+}
+.mat-table {
+  justify-content: center;
+}
+.cdk-virtual-scroll-data-source-example .example-viewport {
+  height: 800px;
+  width: 100%;
+  border: 1px solid white;
+  background-color:rgb(255, 193, 7);
+}
+
+.cdk-virtual-scroll-data-source-example
+  .example-viewport
+  .cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.cdk-virtual-scroll-data-source-example .example-item {
+  width: 50px;
+  height: 100%;
+  writing-mode: vertical-lr;
+}

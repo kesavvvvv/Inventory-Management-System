@@ -1,0 +1,24 @@
+.demo-tab-group {
+  border: 1px solid #080808;
+}
+
+.demo-tab-content {
+  padding: 16px;
+}
+
+.mat-tab-label {
+  background-color: black;
+  /* background-color: rgb(82, 3, 119); */
+}
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-cell {
+  text-align: center;
+  justify-content: center;
+}
+.mat-table {
+  justify-content: center;
+}

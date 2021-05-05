@@ -1,0 +1,98 @@
+<div mat-dialog-content>
+    <form [formGroup]="dialogformgroup">
+      <div fxLayout="row" fxLayoutAlign="space-evenly start">
+        <mat-form-field>
+          <label>productId</label>
+          <input matInput formControlName="productId" [matAutocomplete]="auto" />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of products" [value]="option.itemId">
+              {{ option.itemName }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+          <label>supplierId</label>
+          <input
+            matInput
+            formControlName="supplierId"
+            [matAutocomplete]="auto2"
+          />
+          <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option
+              *ngFor="let option2 of suppliers"
+              [value]="option2.supplierId"
+            >
+              {{ option2.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-evenly start">
+        <mat-form-field>
+          <label>status</label>
+          <mat-select disableRipple formControlName="status">
+            <mat-option value="draft">Draft</mat-option>
+          <mat-option value="raised">Raised</mat-option>
+          <mat-option value="received">Received</mat-option>
+          <mat-option value="closed">Closed</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <div
+            *ngIf="dialogformgroup.controls['purchaseQuantity'].invalid"
+            class="alert"
+          >
+            <small class="formError">Quantity greater than 10 needed!</small>
+          </div>
+          <label>purchaseQuantity</label>
+  
+          <input matInput formControlName="purchaseQuantity" />
+        </mat-form-field>
+      </div>
+      
+      <div fxLayout="row" fxLayoutAlign="space-evenly start">
+        <mat-form-field>
+          <label>paid</label>
+          <input matInput formControlName="paid" />
+        </mat-form-field>
+        <mat-form-field>
+          <label>paymentMethod</label>
+          <input matInput formControlName="paymentMethod" />
+        </mat-form-field>
+      </div>
+      
+      
+  
+      <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly start">
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-button cdkFocusInitial (click)="onNoClick('update')">
+          Update
+        </button>
+        <button
+          mat-button
+          *ngIf="data.status === 'draft'"
+          cdkFocusInitial
+          (click)="onNoClick('raised')"
+        >
+          Raise Order
+        </button>
+        <button
+          mat-button
+          *ngIf="data.status === 'raised'"
+          cdkFocusInitial
+          (click)="onNoClick('received')"
+        >
+          Accept Order
+        </button>
+        <button
+          mat-button
+          *ngIf="data.status === 'received'"
+          cdkFocusInitial
+          (click)="onNoClick('closed')"
+        >
+          Close Order
+        </button>
+      </div>
+    </form>
+  </div>
+  

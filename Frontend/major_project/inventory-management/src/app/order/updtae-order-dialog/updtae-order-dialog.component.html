@@ -1,0 +1,94 @@
+<div mat-dialog-content>
+  <form [formGroup]="dialogformgroup">
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>productId</label>
+        <input matInput formControlName="productId" [matAutocomplete]="auto" />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of products" [value]="option.itemId">
+            {{ option.itemName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <label>customerId</label>
+        <input
+          matInput
+          formControlName="customerId"
+          [matAutocomplete]="auto2"
+        />
+        <mat-autocomplete #auto2="matAutocomplete">
+          <mat-option
+            *ngFor="let option2 of customers"
+            [value]="option2.customerId"
+          >
+            {{ option2.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>status</label>
+        <mat-select disableRipple formControlName="status">
+          <mat-option value="not confirmed">not confirmed</mat-option>
+          <mat-option value="confirmed">confirmed</mat-option>
+          <mat-option value="shipped">shipped</mat-option>
+          <mat-option value="delivered">delivered</mat-option>
+        </mat-select>
+        <!-- <input matInput formControlName="status" /> -->
+      </mat-form-field>
+      <mat-form-field>
+        <div
+          *ngIf="dialogformgroup.controls['orderQuantity'].invalid"
+          class="alert"
+        >
+          <small class="formError">Quantity greater than 10 needed!</small>
+        </div>
+        <label>orderQuantity</label>
+
+        <input matInput formControlName="orderQuantity" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+      <mat-form-field>
+        <label>paid</label>
+        <input matInput formControlName="paid" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>paymentMethod</label>
+        <input matInput formControlName="paymentMethod" />
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly start">
+      <button mat-button (click)="close()">Cancel</button>
+      <button mat-button cdkFocusInitial (click)="onNoClick('update')">
+        Update
+      </button>
+      <button
+        mat-button
+        *ngIf="data.status === 'not confirmed'"
+        cdkFocusInitial
+        (click)="onNoClick('confirmed')"
+      >
+        Confirm Order
+      </button>
+      <button
+        mat-button
+        *ngIf="data.status === 'confirmed'"
+        cdkFocusInitial
+        (click)="onNoClick('shipped')"
+      >
+        Ship Order
+      </button>
+      <button
+        mat-button
+        *ngIf="data.status === 'shipped'"
+        cdkFocusInitial
+        (click)="onNoClick('delivered')"
+      >
+        Deliever Order
+      </button>
+    </div>
+  </form>
+</div>
